@@ -156,6 +156,8 @@ http://www.holub.com/goodies/uml/images/activity_swim_lane.gif
 
 == Example Activity Diagram ==
 
+http://www.holub.com/goodies/uml/images/class_example.gif
+
 {{{
 <START> ---> (request deposit slip) ---> (Create deposit slip) ---> (Fill out and submit deposit slip & passbook) ---> <FORK1>
 
