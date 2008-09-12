@@ -1,0 +1,386 @@
+#summary Examples of UMLwiki syntax
+
+Following examples are based on graphics from http://www.holub.com/goodies/uml/ webpage by Allen Holub.
+
+= Commenting =
+
+http://www.holub.com/goodies/uml/images/comment.gif
+
+{{{
+[Commenting on this] /* This is a comment. */
+}}}
+
+= Packages Diagram =
+
+http://www.holub.com/goodies/uml/images/package.gif
+
+{{{
+[ com.holub |
+  [ Application | ]
+  [ tools |
+    [ Oracle | ] [ Sybase | ] ---|> [ Database Interfaces | ]
+                                                              ]
+                                                                ]
+
+[ com.holub | ] ---> <<import>> [ Java.awt | ]
+
+[ Application | ] ---> <<access>> [ Database Interfaces | ]
+}}}
+
+= Use Case Diagram =
+
+http://www.holub.com/goodies/uml/images/use_case.gif
+
+{{{
+O+< "Shipper" --- (Send Product)
+
+O+< "Salesperson" --- (Place Recurring Order) (Create Account)
+
+O+< "Salesperson" 1 --- * (Place Order)
+
+O+< "Supervisor" ---|> O+< "Salesperson"
+
+O+< "Supervisor" --- (Establish Credit)
+
+(Send Product) ---> <<requires>> (Place Order)
+
+(Place Recurring Order) ---> <<extends>> (Place Order)
+
+(Place Order) ---> <<requires>> (Create Account)
+
+(Create Account) ---> <<includes>> (Establish Credit)
+}}}
+
+= Activity Diagram =
+
+== Starting and Stopping ==
+
+http://www.holub.com/goodies/uml/images/activity_start_stop.gif
+
+{{{
+<START> ---> (Activity1) --- <BRANCH1> ---> (Activity2) ---> <END>
+
+<BRANCH1> ---> (Activity3) ---> <STOP>
+}}}
+
+== Subcase ==
+
+http://www.holub.com/goodies/uml/images/activity_sub.gif
+
+{{{
+(Request Identification) ---> (Authenticate Customer {-E}) ---> (Show Account Info)
+}}}
+
+== Synchronization ==
+
+http://www.holub.com/goodies/uml/images/activity_synchronization.gif
+
+{{{
+(Load Coffee into Machine) ---> <FORK1> "(fork)"
+
+<FORK1> ---> (Make Coffee) ---> <JOIN1>
+
+<FORK1> ---> (Steam Milk) ---> <JOIN1> "(join)"
+
+<JOIN1> ---> (Add milk to coffee)
+}}}
+
+== Guards ==
+
+http://www.holub.com/goodies/uml/images/activity_guard.gif
+
+{{{
+(Make Coffee) ---> [found coffee] (Load Coffee into Machine)
+
+(Make Coffee) ---> [no coffee] (Go to Store)
+}}}
+
+== Decision ==
+
+http://www.holub.com/goodies/uml/images/activity_decision.gif
+
+{{{
+(Go to Store) ---> <BRANCH1> ---> [Kona found] (Buy 1/2 Pound of Kona) ---> <MERGE1> "(merge)" ---> (Go Home)
+
+<BRANCH1> ---> [no Kona] <BRANCH2> "(branch)" ---> [Sumatra found] (Buy full Pound of Sumatra) ---> <MERGE1>
+
+<BRANCH2> ---> [no Sumatra] <END>
+}}}
+
+== Signals ==
+
+http://www.holub.com/goodies/uml/images/signals.gif
+
+{{{
+(Process Order) ---> [Request Payment> ---> >Payment Received] ---> (Ship Order)
+
+|><| "30 days since payment requested" ---> (Cancel Order)
+}}}
+
+== Exceptions ==
+
+http://www.holub.com/goodies/uml/images/exception.gif
+
+{{{
+(Total Items) ---> (Process Order)
+
+(Total Items) -/-> "Math Error" (Create Error Page)
+}}}
+
+== Object Flow ==
+
+http://www.holub.com/goodies/uml/images/data.flow.gif
+
+{{{
+(Receive Invoice)[Invoice] ---> <BRANCH1> ---> [paid] <END>
+
+<BRANCH1> ---> [else] [Invoice](Process Invoice) ---> (Cut Check)[Check] ---> [Check](Send Payment) ---> <END>
+}}}
+
+== Swim Lanes ==
+
+http://www.holub.com/goodies/uml/images/activity_swim_lane.gif
+
+{{{
+(Submit Timesheet) ---> (Authorize Timesheet) ---> (Cut Paycheck)
+
+[ Authorization :
+  (Authorize Timesheet) ]
+
+[ Tracking : 
+  (Submit Timesheet) ]
+
+[ Accounting :
+  (Cut Paycheck) ]
+}}}
+
+== Example Activity Diagram ==
+
+UML diagram:
+
+UMLwiki:
+
+<START> ---> (request deposit slip) ---> (Create deposit slip) ---> (Fill out and submit deposit slip & passbook) ---> <FORK1>
+
+<FORK1> ---> (verify identity) /* Teller recognizes bank officers as surrogates for kids */ ---> <JOIN1>
+
+<FORK1> ---> <BRANCH1> ---> [Parent unavailable] (mark deposit as unapproved)
+/* Requests are stored in the passbook as unapproved transactions */ ---> <MERGE1> ---> <JOIN1>
+
+<BRANCH1> ---> [Parent available] (approve deposit) ---> <MERGE1>
+
+<JOIN1> ---> (update passbook) ---> (examine passbook) ---> <END>
+
+[ Requesting :
+  (request deposit slip) (Fill out and submit deposit slip & passbook) (examine passbook) ]
+
+[ Processing :
+  (Create deposit slip) (verify identity) (mark deposit as unapproved) (update passbook) <FORK1> <JOIN1> ]
+
+[ Authorizing :
+  <BRANCH1> (approve deposit) <MERGE1> ]
+
+= Class Diagram =
+
+== Collaboration ==
+
+http://www.holub.com/goodies/uml/images/design_pattern.gif
+
+{{{
+[Some_class] "Role" --- (Pattern)
+
+[Some_class1] "Subject" --- (Observer) --- "Concrete Observer" [Some_Class2] "Real Subject" --- (Proxy)
+}}}
+
+== Classes ==
+
+http://www.holub.com/goodies/uml/images/classbox.gif
+
+{{{
+[               Employee
+              <<abstract>>
+ -------------------------------------
+ -Identity : String
+ -------------------------------------
+ +you_re_fired() : void
+ +sit_there(location : Cube) : boolean /* Optionally show a \n method's code in a \n comment */ ]
+}}}
+
+http://www.holub.com/goodies/uml/images/classbox_named.gif
+
+{{{
+[      Manager
+ -------------------
+  *Responsibilities*
+ Authorize timesheet
+ Initiate paycheck
+ -------------------
+    *Operations*
+ +authorize() : void
+ +pay() : void
+ -------------------
+    *Exceptions*
+ Employee fired     ]
+}}}
+
+http://www.holub.com/goodies/uml/images/attribute0.gif 
+
+{{{
+[    Person
+ -------------
+ name : String
+ ------------- ]
+}}}
+
+http://www.holub.com/goodies/uml/images/attribute1.gif
+
+{{{
+[ Person
+ -------
+ ------- ]
+
+[ String
+ -------
+ ------- ] ---<@> "name" [Person]
+}}}
+
+or:
+
+{{{
+[ String
+ -------
+ ------- ]
+
+[ Person
+ -------
+ name     <@>--- [String]
+ ------- ]
+}}}
+
+== Associations ==
+
+http://www.holub.com/goodies/uml/images/association.gif
+
+{{{
+[A] 1..* _"A's role in B" --- "relationship" _"B's role in A" 1..* [B]
+}}}
+
+http://www.holub.com/goodies/uml/images/navigation.gif
+
+{{{
+[Sender] <>---> [Receiver]
+}}}
+
+http://www.holub.com/goodies/uml/images/companyemployee.gif
+
+{{{
+[               Company
+             <<singleton>>
+ -----------------------------------
+ -----------------------------------
+ +give_me_a_rise (employee : Person)
+ +please_hire_me (prospect : Person) ]
+
+[        Person
+ -----------------------
+ -name : String
+ -----------------------
+ +you_re_fired () : void ]
+
+[Company] 1 -employer <@>--- "< works for" -employee 1..n [Person] 1 -boss --- -flunkies 1..* [Person]
+}}}
+
+== Implementation Inheritance ==
+
+http://www.holub.com/goodies/uml/images/extends.gif
+
+{{{
+[        SuperClass
+ --------------------------
+ --------------------------
+ -concrete () : void
+ #override (arg: int) : int ]
+
+[        SubClass
+ ---------------------------
+ ---------------------------
+ +override (arg : int) : int
+ +additional () : Cls       ] ---|> [SuperClass]
+}}}
+
+== Interface Inheritance ==
+
+http://www.holub.com/goodies/uml/images/interface1.gif
+
+{{{
+[User] --- -role [/InterfaceName/] <|--- [Implementor]
+}}}
+
+or:
+
+{{{
+[User] --- -role [InterfaceName <<interface>>] <|--- [Implementor]
+}}}
+
+== Nesting ==
+
+http://www.holub.com/goodies/uml/images/nested.gif
+
+{{{
+[Outer1] (+)--- [Inner1]
+
+[Outer2] (+)--- [Inner2] [Inner3] [Inner4]
+}}}
+
+== Dependency ==
+
+http://www.holub.com/goodies/uml/images/dependency.gif
+
+{{{
+[User] ---> <<creates>> [Resource]
+}}}
+
+== Aggregation ==
+
+http://www.holub.com/goodies/uml/images/aggregation.gif
+
+{{{
+[Whole] <>--- -role [Part]
+}}}
+
+== Composition ==
+
+http://www.holub.com/goodies/uml/images/composition.gif
+
+{{{
+[Container] <@>--- -role [Item]
+}}}
+
+== Navigability ==
+
+http://www.holub.com/goodies/uml/images/navigability.gif
+
+{{{
+[Sender] <>---> -role [Receiver]
+
+[Sender] -----> -role [Receiver]
+
+[Sender] ------ -role [Receiver]
+
+[Sender] X----> -role [Receiver]
+}}}
+
+== Constraint ==
+
+http://www.holub.com/goodies/uml/images/ordered.gif
+
+{{{
+[      Item
+ ----------------
+ ----------------
+ key() : Identity ]
+
+[Container] --- {ordered} -role [Item]
+}}}
+
+ 
