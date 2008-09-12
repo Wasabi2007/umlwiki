@@ -1,6 +1,6 @@
 #summary Examples of UMLwiki syntax
 
-Following examples are based on graphics from http://www.holub.com/goodies/uml/ webpage by Allen Holub.
+Following examples are based on graphics from [http://www.holub.com/goodies/uml/ UML webpage by Allen Holub] (black-white) and [http://www.visual-paradigm.com/VPGallery/diagrams/index.html VP-UML documentation] (color).
 
 = Commenting =
 
@@ -383,4 +383,43 @@ http://www.holub.com/goodies/uml/images/ordered.gif
 [Container] --- {ordered} -role [Item]
 }}}
 
-http://www.holub.com/goodies/uml/images/class_example.gif
+== Complex Constraint ==
+
+http://www.holub.com/goodies/uml/images/subset.gif
+
+{{{
+[Collection] <>--- [Vector] {or} <>--- [Hashtable]
+
+[Comitee] * <>--- "member-of" * [Person] {subset} 1 <>--- "chair-of" * [Person]
+
+[Person] _boss 0..1 --- /* { Person.employeer == Person.boss.employeer } */ * _peon [Person] _employee * --- 0..1 _employer [Company]
+}}}
+
+== Qualified Association ==
+
+http://www.holub.com/goodies/uml/images/qualified.gif
+
+{{{
+[            User 
+ -----------------------------
+ -----------------------------
+ add(key : UID, value : Item) ][UID] --- _bag [Item]
+
+[Chessboard][rank: Rank, file: File] 1 <@>---> 1 [Square]
+}}}
+
+== Association Class ==
+
+http://www.holub.com/goodies/uml/images/association_class.gif
+
+{{{
+[ Ticket
+ -------------
+ when: Date
+ where: Date
+ to: Airport
+ from: Airport
+ ------------- ]
+
+[Airline] _carier --- < [Ticket] > "< travels on" _passenger [Person]
+}}}
