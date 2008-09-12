@@ -29,6 +29,34 @@ http://www.holub.com/goodies/uml/images/package.gif
 
 = Use Case Diagram =
 
+== Actor ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Actor.png
+
+{{{
+O+< "Customer" --- [ATMSystem : (Withdraw) (Transfer Funds)] --- O+< "Bank"
+}}}
+
+== Extend ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Extend.png
+
+{{{
+O+< "Customer" --- [ATMSystem : (Withdraw) (Deposit Money) (Online Help)]
+
+(Online Help) ---> <<extend>> (Perform ATM Transaction | Selection)
+}}}
+
+== Include ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Include.png
+
+{{{
+(Withdraw) ---> <<include>> (Card Identification)
+}}}
+
+== Examples ==
+
 http://www.holub.com/goodies/uml/images/use_case.gif
 
 {{{
