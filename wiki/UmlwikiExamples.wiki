@@ -156,10 +156,7 @@ http://www.holub.com/goodies/uml/images/activity_swim_lane.gif
 
 == Example Activity Diagram ==
 
-UML diagram:
-
-UMLwiki:
-
+{{{
 <START> ---> (request deposit slip) ---> (Create deposit slip) ---> (Fill out and submit deposit slip & passbook) ---> <FORK1>
 
 <FORK1> ---> (verify identity) /* Teller recognizes bank officers as surrogates for kids */ ---> <JOIN1>
@@ -179,6 +176,7 @@ UMLwiki:
 
 [ Authorizing :
   <BRANCH1> (approve deposit) <MERGE1> ]
+}}}
 
 = Class Diagram =
 
