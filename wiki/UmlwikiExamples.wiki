@@ -44,7 +44,7 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Extend.png
 {{{
 O+< "Customer" --- [ATMSystem : (Withdraw) (Deposit Money) (Online Help)]
 
-(Online Help) ---> <<extend>> (Perform ATM Transaction | Selection)
+(Online Help) ---> <<extend>> (Perform ATM Transaction | Extension Points: Selection)
 }}}
 
 == Include ==
