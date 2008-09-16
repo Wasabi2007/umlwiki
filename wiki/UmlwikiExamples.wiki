@@ -306,6 +306,8 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Usage.png
 
 {{{
 [Order] ---> <<use>> [LineItem]
+}}}
+
 
 == Associations ==
 
