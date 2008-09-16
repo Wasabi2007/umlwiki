@@ -285,6 +285,28 @@ or:
  ------- ]
 }}}
 
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Class.png
+
+{{{
+[ Windows
+ ----------------------------
+ +size : Area = (100,100)
+ #visibility : Boolean = true
+ +defaultSize : Rectrangle
+ -xWin : XWindow
+ ----------------------------
+ +display()
+ +hide()
+ -attach(xWin : XWindow)     ]
+}}}
+
+== Usage ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Usage.png
+
+{{{
+[Order] ---> <<use>> [LineItem]
+
 == Associations ==
 
 http://www.holub.com/goodies/uml/images/association.gif
@@ -350,6 +372,12 @@ or:
 [User] --- -role [InterfaceName <<interface>>] <|--- [Implementor]
 }}}
 
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/InterfaceRealization.png
+
+{{{
+[/ISensor/] <|--- [ProximitySensor]
+}}}
+
 == Nesting ==
 
 http://www.holub.com/goodies/uml/images/nested.gif
@@ -358,6 +386,14 @@ http://www.holub.com/goodies/uml/images/nested.gif
 [Outer1] (+)--- [Inner1]
 
 [Outer2] (+)--- [Inner2] [Inner3] [Inner4]
+}}}
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Package.png
+
+{{{
+[ Types | [Integer] [Time] ]
+
+[ Types | ] (+)--- [Shape] [Point]
 }}}
 
 == Dependency ==
