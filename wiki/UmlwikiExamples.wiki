@@ -215,9 +215,9 @@ http://www.holub.com/goodies/uml/images/activity.3.gif
 http://www.holub.com/goodies/uml/images/design_pattern.gif
 
 {{{
-[Some_class] "Role" --- (Pattern)
+[Some_class] _Role --- (Pattern)
 
-[Some_class1] "Subject" --- (Observer) --- "Concrete Observer" [Some_Class2] "Real Subject" --- (Proxy)
+[Some_class1] _Subject --- (Observer) --- _"Concrete Observer" [Some_Class2] _"Real Subject" --- (Proxy)
 }}}
 
 == Classes ==
@@ -488,4 +488,62 @@ http://www.holub.com/goodies/uml/images/association_class.gif
  ------------- ]
 
 [Airline] _carier --- < [Ticket] > "< travels on" _passenger [Person]
+}}}
+
+= Component Diagram =
+
+== Component ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component.png
+
+{{{
+[Order {=}]
+}}}
+
+== Component implements Interface ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-implements-Interface.png
+
+{{{
+O "QuoteInf" --- [<<component>> QuoteService _]
+}}}
+
+== Component has provided Port (typed by Interface) ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-provided-Port.png
+
+{{{
+O "OrderEntry" --- [][<<component>> Store _]
+}}}
+
+== Component uses Interface ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-uses-Interface.png
+
+{{{
+) "Person" --- [<<component>> Order]
+}}}
+
+== Component has required Port ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-required-Port.png
+
+{{{
+) "AccountPayable" --- [][<<component>> Order]
+}}}
+
+== Component has complex Port ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-complex-Port.png
+
+{{{
+O "Tracking" ) "Invoice" ) "Person" --- [][<<component>> Order]
+}}}
+
+== Assembly connector ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connector.png
+
+{{{
+[<<component>> Order] --- _OrderableItem ( O "Class" --- _OrderableItem [<<component>> Product]
 }}}
