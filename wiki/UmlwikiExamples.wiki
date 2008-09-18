@@ -547,3 +547,55 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connect
 {{{
 [<<component>> Order] --- _OrderableItem ( O "Class" --- _OrderableItem [<<component>> Product]
 }}}
+
+== Example ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagram-Sample.png
+
+{{{
+[<<application>> Order Management {=}] ---> O "ICustomer" --- [Customer {=}]
+
+[<<application>> Order Management {=}] ---> O "IOrder" --- [Order {=}]
+
+[Customer {=}] ---> [<<infrastructure>> Persistence {=}]
+
+[Order {=}] ---> [<<infrastructure>> Persistence {=}]
+
+[Persistence {=}] ---> O "JDBC" --- [Database {=}]
+
+[Customer {=}] ---> [Database {=}]
+}}}
+
+= Deployment Diagram =
+
+== Node ==
+
+{{{
+/|:AppServer|/
+}}}
+
+== Association ==
+
+{{{
+/|:AppServer|/ * --- 1 /|DBServer|/
+}}}
+
+== Dependency ==
+
+{{{
+/|ShoppingCard|/ ---> /|Order|/
+}}}
+
+== Example ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Deployment-Diagram-Sample.png
+
+{{{
+/| Database Server [Oracle Database {=}] --- O "Transaction Request"] |/
+
+/| Application Server [J2EE Server {=}] --- O "Order Request" |/
+
+/| Client [Web Browser {=}] [Swing Application {=}] |/
+
+[Oracle Database {=}] <--- [J2EE Server {=}] <--- [Web Browser {=}] [Swing Application {=}]
+}}}
