@@ -521,7 +521,7 @@ O- "OrderEntry" --- [][<<component>> Store _]
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-uses-Interface.png
 
 {{{
-) "Person" --- [<<component>> Order]
+)- "Person" --- [<<component>> Order]
 }}}
 
 == Component has required Port ==
@@ -529,7 +529,7 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-uses-I
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-required-Port.png
 
 {{{
-) "AccountPayable" --- [][<<component>> Order]
+)- "AccountPayable" --- [][<<component>> Order]
 }}}
 
 == Component has complex Port ==
