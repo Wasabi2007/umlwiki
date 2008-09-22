@@ -505,7 +505,7 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component.png
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-implements-Interface.png
 
 {{{
-O "QuoteInf" --- [<<component>> QuoteService _]
+O- "QuoteInf" --- [<<component>> QuoteService _]
 }}}
 
 == Component has provided Port (typed by Interface) ==
@@ -513,7 +513,7 @@ O "QuoteInf" --- [<<component>> QuoteService _]
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-provided-Port.png
 
 {{{
-O "OrderEntry" --- [][<<component>> Store _]
+O- "OrderEntry" --- [][<<component>> Store _]
 }}}
 
 == Component uses Interface ==
@@ -537,7 +537,7 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-re
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-complex-Port.png
 
 {{{
-O "Tracking" ) "Invoice" ) "Person" --- [][<<component>> Order]
+O- "Tracking" )- "Invoice" )- "Person" --- [][<<component>> Order]
 }}}
 
 == Assembly connector ==
@@ -545,7 +545,7 @@ O "Tracking" ) "Invoice" ) "Person" --- [][<<component>> Order]
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connector.png
 
 {{{
-[<<component>> Order] --- _OrderableItem ( O "Class" --- _OrderableItem [<<component>> Product]
+[<<component>> Order] --- _OrderableItem -(O- "Class" --- _OrderableItem [<<component>> Product]
 }}}
 
 == Example ==
@@ -553,15 +553,15 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connect
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagram-Sample.png
 
 {{{
-[<<application>> Order Management {=}] ---> O "ICustomer" --- [Customer {=}]
+[<<application>> Order Management {=}] ---> O- "ICustomer" --- [Customer {=}]
 
-[<<application>> Order Management {=}] ---> O "IOrder" --- [Order {=}]
+[<<application>> Order Management {=}] ---> O- "IOrder" --- [Order {=}]
 
 [Customer {=}] ---> [<<infrastructure>> Persistence {=}]
 
 [Order {=}] ---> [<<infrastructure>> Persistence {=}]
 
-[Persistence {=}] ---> O "JDBC" --- [Database {=}]
+[Persistence {=}] ---> O- "JDBC" --- [Database {=}]
 
 [Customer {=}] ---> [Database {=}]
 }}}
@@ -570,17 +570,23 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagra
 
 == Node ==
 
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Node.png
+
 {{{
 /|:AppServer|/
 }}}
 
 == Association ==
 
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Association.png
+
 {{{
 /|:AppServer|/ * --- 1 /|DBServer|/
 }}}
 
 == Dependency ==
+
+http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Dependency.png
 
 {{{
 /|ShoppingCard|/ ---> /|Order|/
@@ -591,9 +597,9 @@ http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagra
 http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Deployment-Diagram-Sample.png
 
 {{{
-/| Database Server [Oracle Database {=}] --- O "Transaction Request"] |/
+/| Database Server [Oracle Database {=}] --- O- "Transaction Request"] |/
 
-/| Application Server [J2EE Server {=}] --- O "Order Request" |/
+/| Application Server [J2EE Server {=}] --- O- "Order Request" |/
 
 /| Client [Web Browser {=}] [Swing Application {=}] |/
 
