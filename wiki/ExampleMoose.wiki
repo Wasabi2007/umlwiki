@@ -4,9 +4,19 @@
 
 Moose is an extension of the Perl 5 object system.  Following diagrams describe its API.
 
+= Component Diagram =
+
+{{{
+[ Moose |
+  [Moose {=}]
+]
+
+[Moose|] ---> [Class::MOP|] [List::MoreUtils|] [Sub::Exporter|]
+}}}
 
 = Class Diagram =
 
+{{{
 [                            <<utility>> Moose
  -------------------------------------------------------------------------
  -------------------------------------------------------------------------
@@ -27,5 +37,6 @@ Moose is an extension of the Perl 5 object system.  Following diagrams describe 
  +confess( message : Array )
  +blessed( name : Any ) : Maybe[Ref]
  +init_meta( for_class : Str, base_class : Str = "Moose::Object",
-  metaclass : Str = undef )                                       {hashopt}
+  metaclass : Str = undef )                                          {hash}
  #throw_error( message : Array )                                           ]
+}}}
