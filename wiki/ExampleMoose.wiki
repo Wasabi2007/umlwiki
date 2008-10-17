@@ -9,6 +9,7 @@
 {{{
 [ Moose |
   [Moose {=}]
+  [Moose::Object {=}]
 ]
 
 [Moose|] ---> [Class::MOP|] [List::MoreUtils|] [Sub::Exporter|]
@@ -39,4 +40,16 @@
  +init_meta( for_class : Str, base_class : Str = "Moose::Object",
   metaclass : Str = undef )                                          {hash}
  #throw_error( message : Array )                                           ]
+
+[           Moose::Object
+ -----------------------------------
+ -----------------------------------
+ <<create>> +new( params : Hash )
+ +BUILDARGS( params : Array ) : Hash
+ +BUILDALL()
+ +DEMOLISHALL()
+ +does( role_name : Str )
+ +DOES( class_or_role_name : Str )
+ +dump( maxdepth : Int )            ]
+
 }}}
