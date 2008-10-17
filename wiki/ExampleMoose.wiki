@@ -1,8 +1,8 @@
-#summary Example diagrams for [http://search.cpan.org/perldoc?Moose Moose]
+#summary Example diagrams for Moose
 
 = Introduction =
 
-Moose is an extension of the Perl 5 object system.  Following diagrams describe its API.
+[http://search.cpan.org/perldoc?Moose Moose] is an extension of the Perl 5 object system.  Following diagrams describe its API.
 
 = Component Diagram =
 
