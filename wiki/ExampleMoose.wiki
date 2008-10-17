@@ -1,0 +1,31 @@
+#summary Example diagrams for [http://search.cpan.org/perldoc?Moose Moose]
+
+= Introduction =
+
+Moose is an extension of the Perl 5 object system.  Following diagrams describe its API.
+
+
+= Class Diagram =
+
+[                            <<utility>> Moose
+ -------------------------------------------------------------------------
+ -------------------------------------------------------------------------
+ +extends( superclasses : Array )
+ +with( roles : Array )
+ +has( name : Str, options : Hash )
+ +has( names : ArrayRef[Str], options : Hash )
+ +before( name : Str, sub : CodeRef )
+ +before( names: ArrayRef[Str], sub : CodeRef )
+ +after( name : Str, sub : CodeRef )
+ +after( names: ArrayRef[Str], sub : CodeRef )
+ +arround( name : Str, sub : CodeRef )
+ +arround( names: ArrayRef[Str], sub : CodeRef )
+ +super()
+ +override( name : Str, sub : CodeRef )
+ +inner()
+ +augment( name : Str, sub : CodeRef )
+ +confess( message : Array )
+ +blessed( name : Any ) : Maybe[Ref]
+ +init_meta( for_class : Str, base_class : Str = "Moose::Object",
+  metaclass : Str = undef )                                       {hashopt}
+ #throw_error( message : Array )                                           ]
