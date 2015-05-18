@@ -1,0 +1,605 @@
+Following examples are based on graphics from [UML webpage by Allen Holub](http://www.holub.com/goodies/uml/) (black-white) and [VP-UML documentation](http://www.visual-paradigm.com/VPGallery/diagrams/index.html) (color).
+
+# Commenting #
+
+![http://www.holub.com/goodies/uml/images/comment.gif](http://www.holub.com/goodies/uml/images/comment.gif)
+
+```
+[Commenting on this] /* This is a comment. */
+```
+
+# Packages Diagram #
+
+![http://www.holub.com/goodies/uml/images/package.gif](http://www.holub.com/goodies/uml/images/package.gif)
+
+```
+[ com.holub |
+  [ Application | ]
+  [ tools |
+    [ Oracle | ] [ Sybase | ] ---|> [ Database Interfaces | ]
+                                                              ]
+                                                                ]
+
+[ com.holub | ] ---> <<import>> [ Java.awt | ]
+
+[ Application | ] ---> <<access>> [ Database Interfaces | ]
+```
+
+# Use Case Diagram #
+
+## Actor ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Actor.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Actor.png)
+
+```
+O+< "Customer" --- [ATMSystem : (Withdraw) (Transfer Funds)] --- O+< "Bank"
+```
+
+## Extend ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Extend.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Extend.png)
+
+```
+O+< "Customer" --- [ATMSystem : (Withdraw) (Deposit Money) (Online Help)]
+
+(Online Help) ---> <<extend>> (Perform ATM Transaction | Extension Points: Selection)
+```
+
+## Include ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Include.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/UseCase/Include.png)
+
+```
+(Withdraw) ---> <<include>> (Card Identification)
+```
+
+## Examples ##
+
+![http://www.holub.com/goodies/uml/images/use_case.gif](http://www.holub.com/goodies/uml/images/use_case.gif)
+
+```
+O+< "Shipper" --- (Send Product)
+
+O+< "Salesperson" --- (Place Recurring Order) (Create Account)
+
+O+< "Salesperson" 1 --- * (Place Order)
+
+O+< "Supervisor" ---|> O+< "Salesperson"
+
+O+< "Supervisor" --- (Establish Credit)
+
+(Send Product) ---> <<requires>> (Place Order)
+
+(Place Recurring Order) ---> <<extends>> (Place Order)
+
+(Place Order) ---> <<requires>> (Create Account)
+
+(Create Account) ---> <<includes>> (Establish Credit)
+```
+
+# Activity Diagram #
+
+## Starting and Stopping ##
+
+![http://www.holub.com/goodies/uml/images/activity_start_stop.gif](http://www.holub.com/goodies/uml/images/activity_start_stop.gif)
+
+```
+<START> ---> (Activity1) --- <BRANCH1> ---> (Activity2) ---> <END>
+
+<BRANCH1> ---> (Activity3) ---> <STOP>
+```
+
+## Subcase ##
+
+![http://www.holub.com/goodies/uml/images/activity_sub.gif](http://www.holub.com/goodies/uml/images/activity_sub.gif)
+
+```
+(Request Identification) ---> (Authenticate Customer {-E}) ---> (Show Account Info)
+```
+
+## Synchronization ##
+
+![http://www.holub.com/goodies/uml/images/activity_synchronization.gif](http://www.holub.com/goodies/uml/images/activity_synchronization.gif)
+
+```
+(Load Coffee into Machine) ---> <FORK1> "(fork)"
+
+<FORK1> ---> (Make Coffee) ---> <JOIN1>
+
+<FORK1> ---> (Steam Milk) ---> <JOIN1> "(join)"
+
+<JOIN1> ---> (Add milk to coffee)
+```
+
+## Guards ##
+
+![http://www.holub.com/goodies/uml/images/activity_guard.gif](http://www.holub.com/goodies/uml/images/activity_guard.gif)
+
+```
+(Make Coffee) ---> [found coffee] (Load Coffee into Machine)
+
+(Make Coffee) ---> [no coffee] (Go to Store)
+```
+
+## Decision ##
+
+![http://www.holub.com/goodies/uml/images/activity_decision.gif](http://www.holub.com/goodies/uml/images/activity_decision.gif)
+
+```
+(Go to Store) ---> <BRANCH1> ---> [Kona found] (Buy 1/2 Pound of Kona) ---> <MERGE1> "(merge)" ---> (Go Home)
+
+<BRANCH1> ---> [no Kona] <BRANCH2> "(branch)" ---> [Sumatra found] (Buy full Pound of Sumatra) ---> <MERGE1>
+
+<BRANCH2> ---> [no Sumatra] <END>
+```
+
+## Signals ##
+
+![http://www.holub.com/goodies/uml/images/signals.gif](http://www.holub.com/goodies/uml/images/signals.gif)
+
+```
+(Process Order) ---> [Request Payment> ---> >Payment Received] ---> (Ship Order)
+
+|><| "30 days since payment requested" ---> (Cancel Order)
+```
+
+## Exceptions ##
+
+![http://www.holub.com/goodies/uml/images/exception.gif](http://www.holub.com/goodies/uml/images/exception.gif)
+
+```
+(Total Items) ---> (Process Order)
+
+(Total Items) -/-> "Math Error" (Create Error Page)
+```
+
+## Object Flow ##
+
+![http://www.holub.com/goodies/uml/images/data.flow.gif](http://www.holub.com/goodies/uml/images/data.flow.gif)
+
+```
+(Receive Invoice)[Invoice] ---> <BRANCH1> ---> [paid] <END>
+
+<BRANCH1> ---> [else] [Invoice](Process Invoice) ---> (Cut Check)[Check] ---> [Check](Send Payment) ---> <END>
+```
+
+## Swim Lanes ##
+
+![http://www.holub.com/goodies/uml/images/activity_swim_lane.gif](http://www.holub.com/goodies/uml/images/activity_swim_lane.gif)
+
+```
+(Submit Timesheet) ---> (Authorize Timesheet) ---> (Cut Paycheck)
+
+[ Authorization :
+  (Authorize Timesheet) ]
+
+[ Tracking : 
+  (Submit Timesheet) ]
+
+[ Accounting :
+  (Cut Paycheck) ]
+```
+
+## Example Activity Diagram ##
+
+![http://www.holub.com/goodies/uml/images/activity.3.gif](http://www.holub.com/goodies/uml/images/activity.3.gif)
+
+```
+<START> ---> (request deposit slip) ---> (Create deposit slip) ---> (Fill out and submit deposit slip & passbook) ---> <FORK1>
+
+<FORK1> ---> (verify identity) /* Teller recognizes bank officers as surrogates for kids */ ---> <JOIN1>
+
+<FORK1> ---> <BRANCH1> ---> [Parent unavailable] (mark deposit as unapproved)
+/* Requests are stored in the passbook as unapproved transactions */ ---> <MERGE1> ---> <JOIN1>
+
+<BRANCH1> ---> [Parent available] (approve deposit) ---> <MERGE1>
+
+<JOIN1> ---> (update passbook) ---> (examine passbook) ---> <END>
+
+[ Requesting :
+  (request deposit slip) (Fill out and submit deposit slip & passbook) (examine passbook) ]
+
+[ Processing :
+  (Create deposit slip) (verify identity) (mark deposit as unapproved) (update passbook) <FORK1> <JOIN1> ]
+
+[ Authorizing :
+  <BRANCH1> (approve deposit) <MERGE1> ]
+```
+
+# Class Diagram #
+
+## Collaboration ##
+
+![http://www.holub.com/goodies/uml/images/design_pattern.gif](http://www.holub.com/goodies/uml/images/design_pattern.gif)
+
+```
+[Some_class] _Role --- (Pattern)
+
+[Some_class1] _Subject --- (Observer) --- _"Concrete Observer" [Some_Class2] _"Real Subject" --- (Proxy)
+```
+
+## Classes ##
+
+![http://www.holub.com/goodies/uml/images/classbox.gif](http://www.holub.com/goodies/uml/images/classbox.gif)
+
+```
+[               Employee
+              <<abstract>>
+ -------------------------------------
+ -Identity : String
+ -------------------------------------
+ +you_re_fired() : void
+ +sit_there(location : Cube) : boolean /* Optionally show a \n method's code in a \n comment */ ]
+```
+
+![http://www.holub.com/goodies/uml/images/classbox_named.gif](http://www.holub.com/goodies/uml/images/classbox_named.gif)
+
+```
+[      Manager
+ -------------------
+  *Responsibilities*
+ Authorize timesheet
+ Initiate paycheck
+ -------------------
+    *Operations*
+ +authorize() : void
+ +pay() : void
+ -------------------
+    *Exceptions*
+ Employee fired     ]
+```
+
+![http://www.holub.com/goodies/uml/images/attribute0.gif](http://www.holub.com/goodies/uml/images/attribute0.gif)
+
+```
+[    Person
+ -------------
+ name : String
+ ------------- ]
+```
+
+![http://www.holub.com/goodies/uml/images/attribute1.gif](http://www.holub.com/goodies/uml/images/attribute1.gif)
+
+```
+[ Person
+ -------
+ ------- ]
+
+[ String
+ -------
+ ------- ] ---<@> "name" [Person]
+```
+
+or:
+
+```
+[ String
+ -------
+ ------- ]
+
+[ Person
+ -------
+ name     <@>--- [String]
+ ------- ]
+```
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Class.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Class.png)
+
+```
+[ Windows
+ ----------------------------
+ +size : Area = (100,100)
+ #visibility : Boolean = true
+ +defaultSize : Rectrangle
+ -xWin : XWindow
+ ----------------------------
+ +display()
+ +hide()
+ -attach(xWin : XWindow)     ]
+```
+
+## Usage ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Usage.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Usage.png)
+
+```
+[Order] ---> <<use>> [LineItem]
+```
+
+
+## Associations ##
+
+![http://www.holub.com/goodies/uml/images/association.gif](http://www.holub.com/goodies/uml/images/association.gif)
+
+```
+[A] 1..* _"A's role in B" --- "relationship" _"B's role in A" 1..* [B]
+```
+
+![http://www.holub.com/goodies/uml/images/navigation.gif](http://www.holub.com/goodies/uml/images/navigation.gif)
+
+```
+[Sender] <>---> [Receiver]
+```
+
+![http://www.holub.com/goodies/uml/images/companyemployee.gif](http://www.holub.com/goodies/uml/images/companyemployee.gif)
+
+```
+[               Company
+             <<singleton>>
+ -----------------------------------
+ -----------------------------------
+ +give_me_a_rise (employee : Person)
+ +please_hire_me (prospect : Person) ]
+
+[        Person
+ -----------------------
+ -name : String
+ -----------------------
+ +you_re_fired () : void ]
+
+[Company] 1 -employer <@>--- "< works for" -employee 1..n [Person] 1 -boss --- -flunkies 1..* [Person]
+```
+
+## Implementation Inheritance ##
+
+![http://www.holub.com/goodies/uml/images/extends.gif](http://www.holub.com/goodies/uml/images/extends.gif)
+
+```
+[        SuperClass
+ --------------------------
+ --------------------------
+ -concrete () : void
+ #override (arg: int) : int ]
+
+[        SubClass
+ ---------------------------
+ ---------------------------
+ +override (arg : int) : int
+ +additional () : Cls       ] ---|> [SuperClass]
+```
+
+## Interface Inheritance ##
+
+![http://www.holub.com/goodies/uml/images/interface1.gif](http://www.holub.com/goodies/uml/images/interface1.gif)
+
+```
+[User] --- -role [/InterfaceName/] <|--- [Implementor]
+```
+
+or:
+
+```
+[User] --- -role [InterfaceName <<interface>>] <|--- [Implementor]
+```
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/InterfaceRealization.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/InterfaceRealization.png)
+
+```
+[/ISensor/] <|--- [ProximitySensor]
+```
+
+## Nesting ##
+
+![http://www.holub.com/goodies/uml/images/nested.gif](http://www.holub.com/goodies/uml/images/nested.gif)
+
+```
+[Outer1] (+)--- [Inner1]
+
+[Outer2] (+)--- [Inner2] [Inner3] [Inner4]
+```
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Package.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Class/Package.png)
+
+```
+[ Types | [Integer] [Time] ]
+
+[ Types | ] (+)--- [Shape] [Point]
+```
+
+## Dependency ##
+
+![http://www.holub.com/goodies/uml/images/dependency.gif](http://www.holub.com/goodies/uml/images/dependency.gif)
+
+```
+[User] ---> <<creates>> [Resource]
+```
+
+## Aggregation ##
+
+![http://www.holub.com/goodies/uml/images/aggregation.gif](http://www.holub.com/goodies/uml/images/aggregation.gif)
+
+```
+[Whole] <>--- -role [Part]
+```
+
+## Composition ##
+
+![http://www.holub.com/goodies/uml/images/composition.gif](http://www.holub.com/goodies/uml/images/composition.gif)
+
+```
+[Container] <@>--- -role [Item]
+```
+
+## Navigability ##
+
+![http://www.holub.com/goodies/uml/images/navigability.gif](http://www.holub.com/goodies/uml/images/navigability.gif)
+
+```
+[Sender] <>---> -role [Receiver]
+
+[Sender] -----> -role [Receiver]
+
+[Sender] ------ -role [Receiver]
+
+[Sender] X----> -role [Receiver]
+```
+
+## Constraint ##
+
+![http://www.holub.com/goodies/uml/images/ordered.gif](http://www.holub.com/goodies/uml/images/ordered.gif)
+
+```
+[      Item
+ ----------------
+ ----------------
+ key() : Identity ]
+
+[Container] --- {ordered} -role [Item]
+```
+
+## Complex Constraint ##
+
+![http://www.holub.com/goodies/uml/images/subset.gif](http://www.holub.com/goodies/uml/images/subset.gif)
+
+```
+[Collection] <>--- [Vector] {or} <>--- [Hashtable]
+
+[Comitee] * <>--- "member-of" * [Person] {subset} 1 <>--- "chair-of" * [Person]
+
+[Person] _boss 0..1 --- /* { Person.employeer == Person.boss.employeer } */ * _peon [Person] _employee * --- 0..1 _employer [Company]
+```
+
+## Qualified Association ##
+
+![http://www.holub.com/goodies/uml/images/qualified.gif](http://www.holub.com/goodies/uml/images/qualified.gif)
+
+```
+[            User 
+ -----------------------------
+ -----------------------------
+ add(key : UID, value : Item) ][UID] --- _bag [Item]
+
+[Chessboard][rank: Rank, file: File] 1 <@>---> 1 [Square]
+```
+
+## Association Class ##
+
+![http://www.holub.com/goodies/uml/images/association_class.gif](http://www.holub.com/goodies/uml/images/association_class.gif)
+
+```
+[ Ticket
+ -------------
+ when: Date
+ where: Date
+ to: Airport
+ from: Airport
+ ------------- ]
+
+[Airline] _carier --- < [Ticket] > "< travels on" _passenger [Person]
+```
+
+# Component Diagram #
+
+## Component ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component.png)
+
+```
+[Order {=}]
+```
+
+## Component implements Interface ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-implements-Interface.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-implements-Interface.png)
+
+```
+O- "QuoteInf" --- [<<component>> QuoteService _]
+```
+
+## Component has provided Port (typed by Interface) ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-provided-Port.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-provided-Port.png)
+
+```
+O- "OrderEntry" --- [][<<component>> Store _]
+```
+
+## Component uses Interface ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-uses-Interface.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-uses-Interface.png)
+
+```
+)- "Person" --- [<<component>> Order]
+```
+
+## Component has required Port ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-required-Port.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-required-Port.png)
+
+```
+)- "AccountPayable" --- [][<<component>> Order]
+```
+
+## Component has complex Port ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-complex-Port.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-has-complex-Port.png)
+
+```
+O- "Tracking" )- "Invoice" )- "Person" --- [][<<component>> Order]
+```
+
+## Assembly connector ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connector.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Assembly-connector.png)
+
+```
+[<<component>> Order] --- _OrderableItem -(O- "Class" --- _OrderableItem [<<component>> Product]
+```
+
+## Example ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagram-Sample.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Component/Component-Diagram-Sample.png)
+
+```
+[<<application>> Order Management {=}] ---> O- "ICustomer" --- [Customer {=}]
+
+[<<application>> Order Management {=}] ---> O- "IOrder" --- [Order {=}]
+
+[Customer {=}] ---> [<<infrastructure>> Persistence {=}]
+
+[Order {=}] ---> [<<infrastructure>> Persistence {=}]
+
+[Persistence {=}] ---> O- "JDBC" --- [Database {=}]
+
+[Customer {=}] ---> [Database {=}]
+```
+
+# Deployment Diagram #
+
+## Node ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Node.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Node.png)
+
+```
+/|:AppServer|/
+```
+
+## Association ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Association.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Association.png)
+
+```
+/|:AppServer|/ * --- 1 /|DBServer|/
+```
+
+## Dependency ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Dependency.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Dependency.png)
+
+```
+/|ShoppingCard|/ ---> /|Order|/
+```
+
+## Example ##
+
+![http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Deployment-Diagram-Sample.png](http://www.visual-paradigm.com/VPGallery/img/diagrams/Deployment/Deployment-Diagram-Sample.png)
+
+```
+/| Database Server [Oracle Database {=}] --- O- "Transaction Request"] |/
+
+/| Application Server [J2EE Server {=}] --- O- "Order Request" |/
+
+/| Client [Web Browser {=}] [Swing Application {=}] |/
+
+[Oracle Database {=}] <--- [J2EE Server {=}] <--- [Web Browser {=}] [Swing Application {=}]
+```

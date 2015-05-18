@@ -1,0 +1,53 @@
+# Introduction #
+
+[Moose](http://search.cpan.org/perldoc?Moose) is an extension of the Perl 5 object system.  Following diagrams describe its API.
+
+# Component Diagram #
+
+```
+[ Moose |
+  [Moose {=}]
+  [Moose::Object {=}]
+]
+
+[Moose|] ---> [Class::MOP|] [List::MoreUtils|] [Sub::Exporter|]
+```
+
+# Class Diagram #
+
+```
+[                            <<utility>> Moose
+ -------------------------------------------------------------------------
+ -------------------------------------------------------------------------
+ +extends( superclasses : Array )
+ +with( roles : Array )
+ +has( name : Str, options : Hash )
+ +has( names : ArrayRef[Str], options : Hash )
+ +before( name : Str, sub : CodeRef )
+ +before( names: ArrayRef[Str], sub : CodeRef )
+ +after( name : Str, sub : CodeRef )
+ +after( names: ArrayRef[Str], sub : CodeRef )
+ +arround( name : Str, sub : CodeRef )
+ +arround( names: ArrayRef[Str], sub : CodeRef )
+ +super()
+ +override( name : Str, sub : CodeRef )
+ +inner()
+ +augment( name : Str, sub : CodeRef )
+ +confess( message : Array )
+ +blessed( name : Any ) : Maybe[Ref]
+ +init_meta( for_class : Str, base_class : Str = "Moose::Object",
+  metaclass : Str = undef )                                          {hash}
+ #throw_error( message : Array )                                           ]
+
+[           Moose::Object
+ -----------------------------------
+ -----------------------------------
+ <<create>> +new( params : Hash )
+ +BUILDARGS( params : Array ) : Hash
+ +BUILDALL()
+ +DEMOLISHALL()
+ +does( role_name : Str )
+ +DOES( class_or_role_name : Str )
+ +dump( maxdepth : Int )            ]
+
+```
